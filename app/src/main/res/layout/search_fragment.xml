@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.eukaytek.duplicatephotocleaner.ui.search.SearchViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.eukaytek.duplicatephotocleaner.ui.search.SearchFragment">
+
+        <View
+            android:layout_width="325dp"
+            android:layout_height="325dp"
+            android:background="@drawable/search_progress_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.18" />
+
+        <com.github.lzyzsd.circleprogress.ArcProgress
+            android:id="@+id/progressView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:visibility="@{viewModel.getProgressViewVisibility()}"
+            app:arc_finished_color="@color/progressColor"
+            app:arc_stroke_width="30dp"
+            app:arc_unfinished_color="#FF900E"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.2"
+            app:arc_text_color="@android:color/transparent"
+            app:setProgress="@{viewModel.currentSearchProgress()}" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="60sp"
+            app:layout_constraintBottom_toBottomOf="@id/progressView"
+            app:layout_constraintEnd_toEndOf="@id/progressView"
+            app:layout_constraintStart_toStartOf="@id/progressView"
+            app:layout_constraintTop_toTopOf="@id/progressView"
+            app:setTextProgress="@{viewModel.currentSearchProgress()}"
+            tools:text="100%\nScan Complete"
+            tools:textColor="#000000"
+            tools:visibility="gone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginBottom="6dp"
+            android:onClick="@{() -> viewModel.onStartStopClicked()}"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/progressView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:setSearchText="@{viewModel.getCurrentSearchState()}"
+            tools:text="Start scan" />
+
+        <TextView
+            android:id="@+id/or"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/or"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:visibility="@{viewModel.getSelectFolderVisibility()}"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressView"
+            tools:text="Or" />
+
+        <TextView
+            android:id="@+id/selectedFolders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.getSelectedFolderText()}"
+            app:selectedFolderTextvisibility="@{viewModel.getSelectedFolderText()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chooseFolder"
+            app:layout_goneMarginTop="64dp" />
+
+        <Button
+            android:id="@+id/chooseFolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/scan_similar_photo_bg"
+            android:layout_marginTop="@dimen/btn_margin_top"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="18sp"
+            android:onClick="@{() -> viewModel.onSelectFolderClicked()}"
+            android:text="@string/btn_choose_folder_to_scan"
+            android:textColor="@color/white"
+            android:visibility="@{viewModel.getSelectFolderVisibility()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/or"
+            tools:text="Choose folder for scanning" />
+
+
+        <Button
+            android:id="@+id/fixButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/scan_similar_photo_bg"
+            android:onClick="@{() -> viewModel.showResultView()}"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/btn_fix_issues"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="32sp"
+            android:visibility="@{viewModel.getFixButtonVisibility()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Go Fix Them!" />
+
+        <TextView
+            android:id="@+id/scanElapsedTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:visibility="@{viewModel.getFixButtonVisibility()}"
+            app:layout_constraintBottom_toTopOf="@id/fixButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:setScanElapsedTime="@{viewModel.getElapsedTime()}"
+            tools:text="2333 duplicates found" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:visibility="@{viewModel.getFixButtonVisibility()}"
+            app:layout_constraintBottom_toTopOf="@id/scanElapsedTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:setDuplicateText="@{viewModel.getDuplicateCount()}"
+            tools:text="2333 duplicates found" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:infoViewVisibility="@{viewModel.getScanFilesCount()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressView">
+
+            <TextView
+                android:id="@+id/scanPhotosCount"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:scanCountText="@{viewModel.getScanFilesCount()}"
+                tools:text="Scanning Photos: 25656"
+                tools:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/elapsedTime"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/white"
+                app:elapsedTime="@{viewModel.getElapsedTime()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scanPhotosCount"
+                tools:text="Time elapsed: 00:30:33"
+                tools:textColor="@android:color/black" />
+
+
+            <TextView
+                android:id="@+id/pleasewait"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/pleasewait"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/elapsedTime"
+                tools:textColor="@android:color/black" />
+
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="@string/scan_time_info_text"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pleasewait"
+                tools:textColor="@android:color/black" />
+
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

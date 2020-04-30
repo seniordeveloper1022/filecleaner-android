@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="marginTop">24dp</dimen>
+    <dimen name="btn_margin_start">36dp</dimen>
+    <dimen name="btn_margin_end">36dp</dimen>
+    <dimen name="btn_margin_top">16dp</dimen>
+    <dimen name="btn_min_height">56dp</dimen>
+    <dimen name="btn_text_size">16sp</dimen>
+    <dimen name="result_list_image_size">72dp</dimen>
+</resources>

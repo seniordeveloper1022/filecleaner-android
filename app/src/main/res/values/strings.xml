@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">Duplicate Photo Cleaner</string>
+
+    <string name="select_scan_mode">Select Your Scan Mode</string>
+    <string name="than_start_to_you_duplicates">Then start scan to find duplicates</string>
+    <string name="btn_scan_similar_photo">Scan Similar Photo</string>
+    <string name="btn_scan_exact_photo">Scan Exact Photo</string>
+
+
+    <string name="logo_desc" translatable="false">Duplicate photo cleaner logo</string>
+    <string name="bg_image_desc" translatable="false">background image</string>
+    <string name="startScan">Start scan</string>
+    <string name="stopScan">Stop scan</string>
+    <string name="scanningInProgress">Searching for duplicate images</string>
+    <string name="scanningFindingDuplicate">Finding dupliates</string>
+    <string name="storage_permission">App needs permission to read and write external storage
+    to scan for duplicate images</string>
+    <string name="or">Or</string>
+    <string name="btn_choose_folder_to_scan">Choose folder for scanning</string>
+    <string name="scanning_one_folder">Find duplicates in %s</string>
+    <string name="scanning_multiple_folder">Scan for duplicates in %d folders.</string>
+    <string name="btn_fix_issues">Go Fix Them!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_help">Help</string>
+    <string name="original_image">Original</string>
+    <string name="app_title">DUPLICATE</string>
+    <string name="app_subtitle">Photo Cleaner</string>
+    <string name="similarityThreshold">Similarity threshold: %1$d</string>
+    <string name="imageComparison">Comparison options</string>
+    <string name="option_rotation">Image rotation</string>
+    <string name="option_greyscale_comparison">User grayscale comparison</string>
+    <string name="restore_defaults">Restore defaults</string>
+    <string name="select_all_files">Select all</string>
+    <string name="clear_selection">Clear</string>
+    <string name="progress">%1$d%%</string>
+    <string name="scan_complete">Scan complete</string>
+    <string name="match_count">%1$d Match found</string>
+    <string name="scanning">Scanning…</string>
+    <string name="pleasewait">Please wait</string>
+    <string name="scan_time_info_text">Scanning time depends on the number of files</string>
+    <string name="scan_file_count">Scanning Photos: %1$d</string>
+    <string name="countdown_timer_text">Time elapsed: %1$s</string>
+    <string name="wait_while_scan_in_progress">Please wait while scan is in progress.</string>
+    <string name="allow">Allow</string>
+    <string name="restart_scan">ReScan</string>
+    <string name="share_app">Share</string>
+    <string name="share_app_text">Try this excellent application for removing duplicate photos: https://play.google.com/store/apps/details?id=com.eukaytek.duplicatephotocleaner</string>
+    <string name="scan_finished_time">Scan took %s to complete.</string>
+    <string name="no_duplicates_found">No duplicate photos found.</string>
+    <string name="similarity_text">Similarity: %1$d%%</string>
+    <string name="similarity_text_unexpanded">%1$d%% match</string>
+    <string name="camera">Camera:</string>
+    <string name="aperture">Aperture:</string>
+    <string name="exposure">Exposure:</string>
+    <string name="focal">Focal Length:</string>
+    <string name="flash">Flash:</string>
+
+    <plurals name="match_count">
+        <item quantity="one">%d Match found</item>
+        <item quantity="other">%d Matches found</item>
+    </plurals>
+
+    <string-array name="fileTypes">
+        <item>BMP</item>
+        <item>JPEG</item>
+        <item>JPG</item>
+        <item>PNG</item>
+        <item>TIFF</item>
+        <item>TIF</item>
+    </string-array>
+
+    <string-array name="fileTypesExtension">
+        <item>.bmp</item>
+        <item>.jpeg</item>
+        <item>.jpg</item>
+        <item>.png</item>
+        <item>.tiff</item>
+        <item>.tiff</item>
+    </string-array>
+</resources>

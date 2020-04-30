@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.eukaytek.duplicatephotocleaner.ui.main.MainViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.eukaytek.duplicatephotocleaner.ui.main.MainFragment">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/bg_image_desc"
+            android:scaleType="centerCrop"
+            bind:imageSource="@{@drawable/background_one}"
+            tools:src="@drawable/background_one" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginTop"
+            android:contentDescription="@string/logo_desc"
+            android:src="@drawable/select_scan_mode_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <android.support.constraint.Guideline
+            android:id="@+id/horizontalGuideline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/marginTop"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalGuideline">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_scan_mode"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/than_start_to_you_duplicates"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+
+            <Button
+                android:id="@+id/btScanSimilar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/btn_margin_start"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="@dimen/btn_margin_end"
+                android:background="@drawable/scan_similar_photo_bg"
+                android:minHeight="@dimen/btn_min_height"
+                android:onClick="@{()->viewModel.scanSimilarPhoto()}"
+                android:text="@string/btn_scan_similar_photo"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/btn_text_size" />
+
+            <Button
+                android:id="@+id/btScanExact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/btn_margin_start"
+                android:layout_marginTop="@dimen/btn_margin_top"
+                android:layout_marginEnd="@dimen/btn_margin_end"
+                android:background="@drawable/scan_similar_photo_bg"
+                android:minHeight="@dimen/btn_min_height"
+                android:onClick="@{()->viewModel.scanExactPhoto()}"
+                android:text="@string/btn_scan_exact_photo"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/btn_text_size" />
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

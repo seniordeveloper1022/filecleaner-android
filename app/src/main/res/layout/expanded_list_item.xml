@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="self"
+            type="com.eukaytek.duplicatephotocleaner.ui.searchresults.ResultsViewModel" />
+
+        <variable
+            name="key"
+            type="java.lang.Integer" />
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+    </data>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/activity_background"
+        android:fillViewport="true">
+
+        <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        android:onLongClick="@{() -> self.onLongClicked(key, position)}">
+
+            <TextView
+                android:id="@+id/similaritytext"
+                style="@style/TextAppearance.AppCompat.Caption"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:background="@drawable/gradient"
+                android:gravity="center"
+                android:text="@{self.getSimilarity(true, key, position)}"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="99" />
+
+            <ImageView
+            android:id="@+id/expandedImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="4:3"
+            android:contentDescription="@string/bg_image_desc"
+            app:bindImageFullSize="@{self.getImage(key, position)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/similaritytext" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/selected_img_border"
+            android:visibility="@{self.isSelected(key, position), default = gone}"
+            app:layout_constraintBottom_toBottomOf="@id/expandedImage"
+            app:layout_constraintEnd_toEndOf="@id/expandedImage"
+            app:layout_constraintStart_toStartOf="@id/expandedImage"
+            app:layout_constraintTop_toTopOf="@id/expandedImage" />
+
+        <TextView
+            android:id="@+id/expImageName"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:text="@{self.getImageName(key, position)}"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/expandedImage"
+            tools:text="Image One.jpg" />
+
+            <TextView
+                android:id="@+id/expImageDimen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@{self.getImageDimen(key, position)}"
+            android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/expImageName"
+                tools:text="320 x 480" />
+
+
+            <TextView
+                android:id="@+id/imageDateInfo"
+                style="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="32dp"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@id/expImageDimen"
+                app:layout_constraintTop_toBottomOf="@id/expImageDimen"
+                app:setMetaData="@{self.getImageDate(key, position)}"
+                tools:text="March 23, 2018 * 3:45 PM" />
+
+            <TextView
+                android:id="@+id/imageloc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@id/imageDateInfo"
+                app:layout_constraintTop_toBottomOf="@id/imageDateInfo"
+                app:setMetaData="@{self.getImageLoc(key, position)}"
+                tools:text="Ontario, U.S.A" />
+
+            <TextView
+                android:id="@+id/imagePath"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@{self.getImagePath(key, position)}"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@id/imageloc"
+                app:layout_constraintTop_toBottomOf="@id/imageloc"
+                tools:text="/storage/emulated/0/Pictures/" />
+
+
+            <View
+                android:id="@+id/separator"
+                android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imagePath" />
+
+            <TextView
+                android:id="@+id/cameraNameLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/camera"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/imageloc"
+                app:layout_constraintTop_toBottomOf="@id/separator"
+                app:misVisibility="@{self.getCameraName(key, position)}"
+                tools:text="Camera: " />
+
+            <TextView
+                android:id="@+id/cameraName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separator"
+                app:layout_constraintTop_toTopOf="@id/cameraNameLabel"
+                app:setMetaData="@{self.getCameraName(key, position)}"
+                tools:text="Canon 40D Mark" />
+
+            <TextView
+                android:id="@+id/cameraAperLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/aperture"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/imageloc"
+                app:layout_constraintTop_toBottomOf="@id/cameraNameLabel"
+                app:misVisibility="@{self.getCameraAperture(key, position)}" />
+
+            <TextView
+                android:id="@+id/cameraAper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separator"
+                app:layout_constraintTop_toTopOf="@id/cameraAperLabel"
+                app:setMetaData="@{self.getCameraAperture(key, position)}"
+                tools:text="f/300" />
+
+            <TextView
+                android:id="@+id/cameraExposureLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/exposure"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/imageloc"
+                app:layout_constraintTop_toBottomOf="@id/cameraAperLabel"
+                app:misVisibility="@{self.getCameraISO(key, position)}" />
+
+            <TextView
+                android:id="@+id/cameraExposure"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separator"
+                app:layout_constraintTop_toTopOf="@id/cameraExposureLabel"
+                app:setMetaData="@{self.getCameraISO(key, position)}"
+                tools:text="1/160" />
+
+            <TextView
+                android:id="@+id/cameraFocLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/focal"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/imageloc"
+                app:layout_constraintTop_toBottomOf="@id/cameraExposureLabel"
+                app:misVisibility="@{self.getFocalLength(key, position)}" />
+
+            <TextView
+                android:id="@+id/cameraFoc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separator"
+                app:layout_constraintTop_toTopOf="@id/cameraFocLabel"
+                app:setMetaData="@{self.getFocalLength(key, position)}"
+                tools:text=".450" />
+
+            <TextView
+                android:id="@+id/cameraFlashLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/flash"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/imageloc"
+                app:layout_constraintTop_toBottomOf="@id/cameraFocLabel"
+                app:misVisibility="@{self.getFocalLength(key, position)}" />
+
+            <TextView
+                android:id="@+id/cameraFlash"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separator"
+                app:layout_constraintTop_toTopOf="@id/cameraFlashLabel"
+                app:setMetaData="@{self.getFocalLength(key, position)}"
+                tools:text="Yes" />
+    </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</layout>

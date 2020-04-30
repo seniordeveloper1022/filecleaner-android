@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.eukaytek.duplicatephotocleaner.ui.settings.SettingsViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/activity_background"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_settings"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/separator"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:alpha="0.3"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title" />
+
+            <TextView
+                android:id="@+id/similarityText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{viewModel.getCurrentThreshold()}"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separator" />
+
+            <android.support.v7.widget.AppCompatSeekBar
+                android:id="@+id/thresholdSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:onProgressChanged="@{viewModel.onProgressChanged}"
+                android:progress="@{viewModel.getCurrentProgress()}"
+                app:layout_constraintStart_toStartOf="parent"
+                android:theme="@style/SeekBarColor"
+                app:layout_constraintTop_toBottomOf="@id/similarityText"
+                app:thumbTint="@color/highlightColor"
+                tools:progress="40" />
+
+            <TextView
+                android:id="@+id/imageComparison"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/imageComparison"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/thresholdSeekBar" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/optionRotation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                app:buttonTint="@color/highlightColor"
+                android:checked="@{viewModel.getOptionRotation()}"
+                android:onCheckedChanged="@{viewModel.onOptionRotationChanged}"
+                android:text="@string/option_rotation"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageComparison" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/optionGrayScale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                app:buttonTint="@android:color/holo_green_light"
+                android:checked="@{viewModel.getOptionGrayScale()}"
+                android:onCheckedChanged="@{viewModel.onOptionGrayScaleChanged}"
+                android:text="@string/option_greyscale_comparison"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/optionRotation" />
+
+            <Button
+                android:id="@+id/restore_button"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/button_bg_outline"
+                android:onClick="@{() -> viewModel.onRestoreSettings()}"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/restore_defaults"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/optionGrayScale" />
+
+            <android.support.v7.widget.LinearLayoutCompat
+                style="@style/Widget.AppCompat.ButtonBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="64dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/button_bg_outline"
+                    android:onClick="@{() -> viewModel.onCancelSettings()}"
+                    android:text="@string/dialog_cancel"
+                    android:textColor="@color/white" />
+
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/scan_similar_photo_bg"
+                    android:onClick="@{() -> viewModel.onApplySettings()}"
+                    android:text="@string/new_folder_ok"
+                    android:textColor="@color/white" />
+            </android.support.v7.widget.LinearLayoutCompat>
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</layout>
